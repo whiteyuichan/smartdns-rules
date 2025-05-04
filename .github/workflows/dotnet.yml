@@ -24,6 +24,6 @@ jobs:
     - name: Run
       run: |
         cd sing-box-cvt/bin/Debug/net9.0
-        ls
-        ./sing-box-cvt.exe
+        chmod +x sing-box-cvt
+        ./sing-box-cvt
         ls
