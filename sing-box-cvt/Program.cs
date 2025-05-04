@@ -38,9 +38,7 @@ namespace sing_box_cvt
 
             SingBoxRule r = JsonSerializer.Deserialize<SingBoxRule>(json)!;
 
-            string folder = "publish";
-            Directory.CreateDirectory(folder);
-            using FileStream fs = new($"{folder}/{key}.conf", FileMode.Create, FileAccess.Write);
+            using FileStream fs = new($"{key}.conf", FileMode.Create, FileAccess.Write);
             using StreamWriter sw = new(fs);
             foreach (string d in r.Rules[0].Domain)
             {
