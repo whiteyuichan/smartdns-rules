@@ -21,3 +21,9 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build --no-restore
+    - name: Run
+      run: |
+        cd sing-box-cvt/bin/Debug/net9.0
+        ls
+        ./sing-box-cvt.exe
+        ls
