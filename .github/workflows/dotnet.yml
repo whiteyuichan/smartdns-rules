@@ -25,5 +25,7 @@ jobs:
       run: |
         cd sing-box-cvt/bin/Debug/net9.0
         chmod +x sing-box-cvt
-        ./sing-box-cvt
-        ls
+        ./sing-box-cvt gfw
+        ./sing-box-cvt google
+        ./sing-box-cvt cn
+        ls publish
