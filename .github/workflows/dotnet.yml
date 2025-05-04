@@ -32,13 +32,18 @@ jobs:
       
     - name: Run
       run: |
-        cd sing-box-cvt/bin/Debug/net9.0
-        chmod +x sing-box-cvt
-        ./sing-box-cvt gfw
-        ./sing-box-cvt google
-        ./sing-box-cvt cn
+        export BIN_PATH=./sing-box-cvt/bin/Debug/net9.0/sing-box-cvt
+        chmod +x $BIN_PATH
+        $BIN_PATH gfw
+        $BIN_PATH google
+        $BIN_PATH cn
         ls
         
+    - name: Move
+      run: |
+        mkdir publish
+        mv *.conf ./publish/
+    
     - name: Release
       uses: svenstaro/upload-release-action@v2
       with:
@@ -47,4 +52,4 @@ jobs:
         tag: latest
         file_glob: true
         overwrite: true
-        file: ./*.conf
+        file: ./publish/*
