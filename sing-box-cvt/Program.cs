@@ -27,21 +27,21 @@ namespace sing_box_cvt
     {
         static async Task Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            string key = args[0];
+            Console.WriteLine($"sing_box_cvt key: {key}");
 
-            string key = "gfw";
             string url = $"https://github.com/MetaCubeX/meta-rules-dat/raw/sing/geo/geosite/{key}.json";
             
             HttpClient client = new();
             string json = await client.GetStringAsync(url);
-            File.WriteAllText($"{key}.json", json);
+            // File.WriteAllText($"{key}.json", json);
 
             SingBoxRule r = JsonSerializer.Deserialize<SingBoxRule>(json)!;
-            if (r.Rules.Length == 0) return;
 
-
-            FileStream fs = new($"{key}.conf", FileMode.Create, FileAccess.Write);
-            StreamWriter sw = new(fs);
+            string folder = "publish";
+            Directory.CreateDirectory(folder);
+            using FileStream fs = new($"{folder}/{key}.conf", FileMode.Create, FileAccess.Write);
+            using StreamWriter sw = new(fs);
             foreach (string d in r.Rules[0].Domain)
             {
                 sw.WriteLine(d);
@@ -50,8 +50,6 @@ namespace sing_box_cvt
             {
                 sw.WriteLine($"*-.{d}");
             }
-            sw.Close();
-            fs.Close();
         }
     }
 }
