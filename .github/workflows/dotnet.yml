@@ -5,6 +5,8 @@ name: .NET
 
 on:
   workflow_dispatch:
+  schedule:
+  - cron: '0 0 * * *' # 8:00 AM UTC+8
 
 jobs:
   build:
@@ -37,12 +39,14 @@ jobs:
         $BIN_PATH gfw
         $BIN_PATH google
         $BIN_PATH cn
+        echo --------------
         ls
         
     - name: Move
       run: |
         mkdir publish
         mv *.conf ./publish/
+        ls ./publish/
     
     - name: Release
       uses: svenstaro/upload-release-action@v2
