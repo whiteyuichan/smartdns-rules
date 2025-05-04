@@ -43,7 +43,7 @@ jobs:
     - name: Release
       uses: svenstaro/upload-release-action@v2
       with:
-        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        repo_token: ${{ secrets.ACTION_TOKEN }}
         release_name: Release ${{ env.BUILDTIME }}
         tag: latest
         file_glob: true
